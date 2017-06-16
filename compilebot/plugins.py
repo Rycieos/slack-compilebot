@@ -8,7 +8,12 @@ import time
 @respond_to(r'.*', re.IGNORECASE)
 @listen_to(r'(?:^|\s|[\W]+)<@{}>'.format(settings.BOT_ID), re.IGNORECASE)
 def respond(message):
-    bot = CompileBot(message)
+    try:
+        bot = CompileBot(message)
+    except ValueError:
+        message.reply("I couldn't understand you")
+        return
+
     try:
         bot.resolve_language()
         if settings.DEBUG:
@@ -39,9 +44,8 @@ class CompileBot:
             self.options = m.group('args').lower() or ''
             self.source = m.group('src')
             self.input = m.group('in') or ''
-        else:
-            message.reply("I couldn't understand you")
-            return
+        if (m is None or self.lang is None or self.source is None):
+            raise ValueError()
 
         if settings.DEBUG:
             print('lang: ' + self.lang)
