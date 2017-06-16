@@ -19,7 +19,7 @@ def respond(message):
         if settings.DEBUG:
             print('resolved lang: ' + bot.lang)
     except ValueError:
-        message.reply('Language {} not found or supported'.format(bot.lang))
+        message.reply('Language "{}" not found or supported'.format(bot.lang))
         return
 
     bot.compile()
