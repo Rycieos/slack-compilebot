@@ -68,8 +68,9 @@ Reply:
 > Output:
 >
 >     1
->     Memory Usage: 75776 bytes
->     Execution Time: 0.48 seconds
+>
+> Memory Usage: 75776 bytes  
+> Execution Time: 0.48 seconds
 
 # How it works
 CompileBot runs off the [slackbot](https://github.com/lins05/slackbot) API, and
