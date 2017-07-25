@@ -32,19 +32,19 @@ class CompileBot:
             print('message: ' + self.message.body['text'])
 
         c_pattern = (
-            r'\s*(?:<@.*?>)?\s*(?P<lang>.*)\s*\n\s*'
-            r'(?P<args>.*)?\s*\n?\s*'
-            r'```(?P<src>(.*\n?)*?)```'
-            r'(?:\n\s*((?i)Input|Stdin):?\s*\n\s*)?'
-            r'(?:```(?P<in>(.*\n?)*)```)?'
+            r'(?is)(?:<@[A-Z0-9]*>)?\s*(?P<lang>[^\n]*)\n'
+            r'(?P<args>.*?)'
+            r'```(?P<src>.*?)```'
+            r'(?:\s*(?:Input|Stdin):?\s*)?'
+            r'(?:```(?P<in>.*?)```)?'
         )
         m = re.search(c_pattern, message.body['text'])
         if m:
-            self.lang = m.group('lang')
-            self.options = m.group('args').lower() or ''
+            self.lang = m.group('lang').strip()
+            self.options = m.group('args').strip().lower() or ''
             self.source = m.group('src')
             self.input = m.group('in') or ''
-        if (m is None or self.lang is None or self.source is None):
+        if (m is None or not self.lang or not self.source):
             raise ValueError()
 
         if settings.DEBUG:
