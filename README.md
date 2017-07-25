@@ -124,3 +124,8 @@ you would want to use. However, if the language you are looking for isn't
 available, you can contact Ideone/Sphere Engine to add a new one, and
 CompileBot will automatically support it.
 
+Some languages need an entry point, like `int main()` in C. All languages use
+the standard for the language. For Java, the `main()` method needs to be in the
+public class `Main`. For C#, the `Main()` method needs to be in the public
+class `Test`.
+
