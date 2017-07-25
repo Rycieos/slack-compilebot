@@ -5,6 +5,14 @@ from sphere_engine import CompilersClientV3
 import re
 import time
 
+pattern = re.compile((
+    r'(?is)(?:<@[A-Z0-9]*>)?\s*(?P<lang>[^\n]*)\n'
+    r'(?P<args>.*?)'
+    r'```(?P<src>.*?)```'
+    r'(?:\s*(?:Input|Stdin):?\s*)?'
+    r'(?:```(?P<in>.*?)```)?'
+))
+
 @respond_to(r'.*', re.IGNORECASE)
 @listen_to(r'(?:^|\s|[\W]+)<@{}>'.format(settings.BOT_ID), re.IGNORECASE)
 def respond(message):
@@ -31,14 +39,7 @@ class CompileBot:
         if settings.DEBUG:
             print('message: ' + self.message.body['text'])
 
-        c_pattern = (
-            r'(?is)(?:<@[A-Z0-9]*>)?\s*(?P<lang>[^\n]*)\n'
-            r'(?P<args>.*?)'
-            r'```(?P<src>.*?)```'
-            r'(?:\s*(?:Input|Stdin):?\s*)?'
-            r'(?:```(?P<in>.*?)```)?'
-        )
-        m = re.search(c_pattern, message.body['text'])
+        m = re.search(pattern, message.body['text'])
         if m:
             self.lang = m.group('lang').strip()
             self.options = m.group('args').strip().lower() or ''
