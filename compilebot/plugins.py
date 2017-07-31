@@ -110,5 +110,9 @@ class CompileBot:
             reply += '\nMemory Usage: {} bytes\n'.format(self.memory)
         if 'time' in self.options:
             reply += '\nExecution Time: {} seconds\n'.format(self.time)
+
+        if not reply:
+            reply += 'There was no output'
+
         self.message.reply(reply)
 
