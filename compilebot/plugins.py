@@ -67,6 +67,9 @@ class CompileBot:
         raise ValueError()
 
     def compile(self):
+        if self.input[0] == '\n':
+          self.input = self.input[1:]
+
         r = self.client.submissions.create(self.source, self.lang, self.input)
         while self.client.submissions.get(r['id'])['status'] != 0:
             time.sleep(1)
@@ -103,7 +106,8 @@ class CompileBot:
             reply += 'Compilation Output:\n```{}```\n'.format(self.cmpinfo)
 
         if self.stdout != '':
-            reply += 'Output:\n```{}```'.format(self.stdout)
+          reply += 'Output:\n```{}```'.format(
+              (self.stdout[:2000] + '..') if len(self.stdout) > 2002 else self.stdout)
         if self.stderr != '':
             reply += 'Stderr:\n```{}```'.format(self.stderr)
         if 'memory' in self.options:
