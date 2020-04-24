@@ -67,7 +67,7 @@ class CompileBot:
         raise ValueError()
 
     def compile(self):
-        if self.input[0] == '\n':
+        if self.input and self.input[0] == '\n':
           self.input = self.input[1:]
 
         r = self.client.submissions.create(self.source, self.lang, self.input)
