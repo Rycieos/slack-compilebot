@@ -2,3 +2,4 @@
 !run.py
 !requirements.txt
 !compilebot/*.py
+!docker-entrypoint.sh

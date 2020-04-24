@@ -1,14 +1,15 @@
 
-DEBUG = True
+DEBUG = False
 
 # Sphere Engine API token and hostname endpoint
 SE_API_TOKEN = '<token>'
 SE_API_ENDPOINT = '9533eeca.compilers.sphere-engine.com'
 
-# Bot user ID
-#BOT_ID = 'UXXXXXXXX'
-#API_TOKEN = "xoxb-XXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXX"
-#ERRORS_TO = "<username>"
+# Slack bot user ID and token
+BOT_ID = 'UXXXXXXXX'
+API_TOKEN = "xoxb-XXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXX"
+# Optional
+ERRORS_TO = "<username>"
 
 PLUGINS = [
     'compilebot.plugins',
