@@ -1,3 +1,4 @@
-simplejson
-slackbot
-sphere-engine
+slackbot>=0.5,<0.6
+sphere-engine==0.17
+# Needed by sphere-engine, but not included in their dependencies
+simplejson>=3,<4
